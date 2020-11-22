@@ -1,0 +1,10 @@
+.Checkout-form {
+    font-size: 2vmin;
+    padding-bottom: 40px;
+  }
+
+  label {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 5px;
+  }

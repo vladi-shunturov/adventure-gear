@@ -1,0 +1,16 @@
+{
+    "products": [
+        {
+            "id":1,
+            "name": "One Wheel (Pint)",
+            "price": 950,
+            "imgName":"onewheel_pint.jpg"
+        },
+        {
+            "id":2,
+            "name": "One Wheel (XR)",
+            "price": 1850,
+            "imgName":"onewheel_xr.jpg"
+        }
+    ]
+}
