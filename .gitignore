@@ -11,7 +11,7 @@
 # production
 /build
 
-#enviornment variables
+#Server-side environment variables which include Stripe secret key 
 .env 
 
 # misc

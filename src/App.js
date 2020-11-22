@@ -1,5 +1,6 @@
 //import logo from './logo.svg';
 import {Component} from 'react';
+import {StripeProvider, Elements} from 'react-stripe-elements'
 import './App.css';
 import Product from './Product';
 import CheckoutForm from './CheckoutForm';
@@ -21,6 +22,7 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <h3>Guest Checkout</h3>
+        <StripeProvider apiKey="pk_test_51HnbQwD8eNCjterIwREj2Td5WjmJ7EYSfLJVskDHSW8D8GPvqVw7vKSwD3zO09lNB8blM5WJxidAWurMsTpHtaap00fD9TXHNo">
         <Product product={product} price={price} quantity={quantity} imageUrl={imageUrl}/>
         <CheckoutForm />
           {/* <img src={logo} className="App-logo" alt="logo" /> */}
