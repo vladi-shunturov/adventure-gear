@@ -63,7 +63,7 @@ app.post("/create-payment-intent", async (req, res) => {
   });
 });
 
-// Expose a endpoint as a webhook handler for asynchronous events.
+// Expose an endpoint as a webhook handler for asynchronous events.
 app.post("/webhook", async (req, res) => {
     let data, eventType;
     console.log("We got a webhook event!");
@@ -98,6 +98,16 @@ app.post("/webhook", async (req, res) => {
       // Fulfill any orders, e-mail receipts, etc
       // To cancel the payment after capture you will need to issue a Refund (https://stripe.com/docs/api/refunds)
       console.log("💰 Payment captured!");
+
+      //Record transaction in our orders log file
+      let fs = require('fs');
+      console.log(data);
+      let logEntry = "\n" + data.object.id + "," + data.object.created + "," + data.object.description + "," + data.object.amount_received + "," + data.object.receipt_email + "," + data.object.customer + "," + data.object.status;
+      fs.appendFile('../logs/ordersLog.csv', logEntry, function (err) {
+        if (err) return console.log(err);
+        console.log("Order log entry created.");
+      });
+
     } else if (eventType === "payment_intent.payment_failed") {
       console.log("❌ Payment failed.");
     }
