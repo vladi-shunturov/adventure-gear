@@ -1,9 +1,13 @@
 //import logo from './logo.svg';
 import {Component} from 'react';
-import {StripeProvider, Elements} from 'react-stripe-elements'
 import './App.css';
 import Product from './Product';
 import CheckoutForm from './CheckoutForm';
+import { loadStripe } from "@stripe/stripe-js";
+import { Elements } from "@stripe/react-stripe-js";
+
+
+const promise = loadStripe("pk_test_51HnbQwD8eNCjterIwREj2Td5WjmJ7EYSfLJVskDHSW8D8GPvqVw7vKSwD3zO09lNB8blM5WJxidAWurMsTpHtaap00fD9TXHNo");
 
 class App extends Component {
   constructor() {
@@ -22,21 +26,10 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <h3>Guest Checkout</h3>
-        <StripeProvider apiKey="pk_test_51HnbQwD8eNCjterIwREj2Td5WjmJ7EYSfLJVskDHSW8D8GPvqVw7vKSwD3zO09lNB8blM5WJxidAWurMsTpHtaap00fD9TXHNo">
         <Product product={product} price={price} quantity={quantity} imageUrl={imageUrl}/>
-        <CheckoutForm />
-          {/* <img src={logo} className="App-logo" alt="logo" /> */}
-          {/* <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a> */}
+        <Elements stripe={promise}>
+          <CheckoutForm />
+        </Elements>
         </header>
       </div>
     );
