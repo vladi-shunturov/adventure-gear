@@ -12,15 +12,25 @@ export default function CheckoutForm() {
   const [clientSecret, setClientSecret] = useState('');
   const stripe = useStripe();
   const elements = useElements();
+ 
+  
   useEffect(() => {
+       //Cart contents - hardcoded for the purposes of this excercise - single item
+    var cartContents = [{
+        id:"one-wheel-pint",
+        name: "One Wheel (Pint)",
+        desc: "The One Wheel Pint is more compact and easy to cary when traveling. It packs the same torgue but has a little less than half the range of the XR. Due do it's size, it's less stable and less forgiving on rough terrain.",
+        price: 975,
+        imgName:"onewheel_pint.jpg"
+    }];
     // Create PaymentIntent as soon as the page loads
-    window
+    window 
       .fetch("http://localhost:4242/create-payment-intent", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
         },
-        body: JSON.stringify({items: [{ id: "xl-tshirt" }]})
+        body: JSON.stringify({items: cartContents})
       })
       .then(res => {
         return res.json();
@@ -29,6 +39,7 @@ export default function CheckoutForm() {
         setClientSecret(data.clientSecret);
       });
   }, []);
+
   const cardStyle = {
     style: {
       base: {
@@ -57,7 +68,11 @@ export default function CheckoutForm() {
     setProcessing(true);
     const payload = await stripe.confirmCardPayment(clientSecret, {
       payment_method: {
-        card: elements.getElement(CardElement)
+        card: elements.getElement(CardElement),
+        billing_details: {
+            name: 'Jenny Rosen',
+            email: 'kjugandi@gmail.com'
+        }
       }
     });
     if (payload.error) {
@@ -71,6 +86,8 @@ export default function CheckoutForm() {
   };
   return (
     <form id="payment-form" onSubmit={handleSubmit}>
+      <input id="name" class="field" placeholder="Full name" required></input>
+      <input id="email" class="field" placeholder="E-mail" required></input>
       <CardElement id="card-element" options={cardStyle} onChange={handleChange} />
       <button
         disabled={processing || disabled || succeeded}
@@ -103,74 +120,3 @@ export default function CheckoutForm() {
     </form>
   );
 }
-
-/*
-import { Component } from 'react';
-import './CheckoutForm.css'
-
-class CheckoutForm extends Component {
-  constructor() {
-    super()
-    this.state = {
-      email: '',
-      cardNumber: '',
-      expirationDate: '',
-      cvc: '',
-      name: '',
-      country: '',
-      zip: ''
-    }
-
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
-  handleChange(event) {
-    this.setState({[event.target.name]: event.target.value});
-  }
-
-  handleSubmit(event) {
-    console.log("STATE ON SUBMIT: ", this.state)
-    event.preventDefault(); //Prevents browser refresh
-    this.setState({
-      email: '',
-      cardNumber: '',
-      expirationDate: '',
-      cvc: '',
-      name: '',
-      country: '',
-      zip: ''
-    })
-  }
-
-  render() {
-    return (
-      <div className="Checkout">
-        <form className="Checkout-form" onSubmit={this.handleSubmit}>
-          <label>
-            Email
-            <input type="email" placeholder="Email" name="email" value={this.state.email} onChange={this.handleChange} />
-          </label>
-          <label>
-            Card Information
-            <input type="text" placeholder="Card number" name="cardNumber" value={this.state.cardNumber} onChange={this.handleChange} />
-            <input type="text" placeholder="MM/YY" name="expirationDate" value={this.state.expirationDate} onChange={this.handleChange} />
-            <input type="text" placeholder="CVC" name="cvc" value={this.state.cvc} onChange={this.handleChange} />
-          </label>
-          <label>
-            Name on Card
-            <input type="text" placeholder="Name on Card" name="name" value={this.state.name} onChange={this.handleChange} />
-          </label>
-          <label>
-            Address
-            <input type="text" name="country" value={this.state.country} onChange={this.handleChange} />
-            <input type="text" name="zip" value={this.state.zip} onChange={this.handleChange} />
-          </label>
-          <button type="submit">Place Order</button>
-        </form>
-      </div>
-    )
-  }
-}
-
-export default CheckoutForm;*/

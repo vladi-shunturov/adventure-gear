@@ -34,28 +34,23 @@ app.use(
 );
 
 
-/*
-//Checkout page
-app.get("/checkout", (req, res) => {
-    // Display checkout page
-    const path = resolve("../public/index.html");
-    res.sendFile(path);
-  });
-  */
-  
-
 const calculateOrderAmount = items => {
-  // Replace this constant with a calculation of the order's amount
-  // Calculate the order total on the server to prevent
-  // people from directly manipulating the amount on the client
-  return 95000;
+    var totalAmount = 0.0;
+    items.forEach((item) => {
+        totalAmount+=item.price;
+      })
+  return totalAmount*100;
 };
+
 app.post("/create-payment-intent", async (req, res) => {
   const { items } = req.body;
+  console.log(items);
+
   // Create a PaymentIntent with the order amount and currency
   const paymentIntent = await stripe.paymentIntents.create({
     amount: calculateOrderAmount(items),
-    currency: "usd"
+    currency: "usd",
+    description: items[0].name
   });
   res.send({
    //publishableKey: process.env.STRIPE_PUBLISHABLE_KEY,
@@ -99,9 +94,8 @@ app.post("/webhook", async (req, res) => {
       // To cancel the payment after capture you will need to issue a Refund (https://stripe.com/docs/api/refunds)
       console.log("💰 Payment captured!");
 
-      //Record transaction in our orders log file
+      //Record transaction in our server-side orders log file
       let fs = require('fs');
-      console.log(data);
       let logEntry = "\n" + data.object.id + "," + data.object.created + "," + data.object.description + "," + data.object.amount_received + "," + data.object.receipt_email + "," + data.object.customer + "," + data.object.status;
       fs.appendFile('../logs/ordersLog.csv', logEntry, function (err) {
         if (err) return console.log(err);
