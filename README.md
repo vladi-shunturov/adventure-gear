@@ -9,7 +9,7 @@ You will need the following:
 - [Node.js](http://nodejs.org) >=14.15.1
 - [NPM](https://www.npmjs.com/get-npm) >= 6.14.8 
 - Modern browser that supports ES6 (Chrome preferred)
-- Stripe account to accept payments ([sign up](https://dashboard.stripe.com/register) for free).
+- Stripe account to accept payments ([sign up](https://dashboard.stripe.com/register) for free)
 - Stripe CLIL to enable routing for webhooks:  [Stripe CLI Install guide](https://stripe.com/docs/stripe-cli#install)
 
 **Note**: The app client uses localhost port 3000 and the app server uses port 4242 - please ensure you have no other processes using any of those two ports prior to testing
