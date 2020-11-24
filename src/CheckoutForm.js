@@ -12,6 +12,7 @@ export default function CheckoutForm() {
   const [clientSecret, setClientSecret] = useState('');
   const stripe = useStripe();
   const elements = useElements();
+
  
   
   useEffect(() => {
@@ -70,8 +71,8 @@ export default function CheckoutForm() {
       payment_method: {
         card: elements.getElement(CardElement),
         billing_details: {
-            name: 'Jenny Rosen',
-            email: 'kjugandi@gmail.com'
+            name: document.querySelector('#name').value,
+            email: document.querySelector('#email').value
         }
       }
     });
@@ -86,8 +87,8 @@ export default function CheckoutForm() {
   };
   return (
     <form id="payment-form" onSubmit={handleSubmit}>
-      <input id="name" class="field" placeholder="Full name" required></input>
-      <input id="email" class="field" placeholder="E-mail" required></input>
+      <input id="name" name="name" class="field" placeholder="Full name" required></input>
+      <input id="email" name="email" class="field" placeholder="E-mail" required></input>
       <CardElement id="card-element" options={cardStyle} onChange={handleChange} />
       <button
         disabled={processing || disabled || succeeded}
