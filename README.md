@@ -1,16 +1,18 @@
 # Adventure Gear - Payment Intent Workflow
 
-Developed by Vladi Shunturov using [Create React App](https://github.com/facebook/create-react-app) and NodeJS.
+Developed by Vladi Shunturov using [Create React App](https://github.com/facebook/create-react-app), NodeJS, Stripe PaymentIntent API & Stripe Elements.
 
 ## Requirements
 
-You’ll need the following:
+You will need the following:
 
-- [Node.js](http://nodejs.org) >=10.0.0
-- Modern browser that supports ES6 (Chrome to see the Payment Request, and Safari to see Apple Pay).
+- [Node.js](http://nodejs.org) >=14.15.1
+- NPM >= 6.14.8 
+- Modern browser that supports ES6 (Chrome preferred)
 - Stripe account to accept payments ([sign up](https://dashboard.stripe.com/register) for free).
+- Stripe CLIL to enable routing for webhooks:  [Stripe CLI Install guide](https://stripe.com/docs/stripe-cli#install)
 
-The app client uses localhost port 3000 and the app server uses port 4242 - please ensure you have no other processes using any of those ports prior to testing
+**Note**: The app client uses localhost port 3000 and the app server uses port 4242 - please ensure you have no other processes using any of those two ports prior to testing
 
 ### Getting Started
 
@@ -21,8 +23,7 @@ cd adventure-gear
 npm install
 ```
 
-**2.** Install the Stripe CLI to enable Webhook routing to localhost:4242
-* Install Stripe CLI by following the [Stripe CLI Install guide](https://stripe.com/docs/stripe-cli#install)
+**2.** Use Stripe CLI to enable Webhook routing to localhost:4242
 * Login with your Stripe account ```stripe login```
 * Establish the webbooks routes using the _listen_ Stripe CLI command and forward webbook events to port 4242 at /webhook
 ```
