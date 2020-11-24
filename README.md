@@ -46,5 +46,5 @@ stripe listen --forward-to localhost:4242/webhook
 ## Using the App
 * The app is very simple and begins with the state of a customer who has already added a single item to her shopping cart and clicked on the checkout button. 
 * The app renders the checkout form, allowing the customer to enter their name, email and payment information to complete the purchase. 
-* Because the screen the app loads into is the checkout screen, the app initiates a Payment Intent as soon as the checkout form loads, which happens immediately after the app itself loads.
+* Because the screen the app loads into is the checkout screen itself, the app initiates a Payment Intent as soon as the checkout form loads, which happens immediately after the app loads.
 * Upon the successful completion of a payment the app logs important details about the confirmed purchase in /logs/ordersLog.csv.
