@@ -16,12 +16,13 @@ export default function CheckoutForm() {
  
   
   useEffect(() => {
-    //Cart contents - hardcoded for the purposes of this excercise - single item
+    //Cart contents - hardcoded for the purposes of this excercise - single item in cart
     const cartContents = [{
         id:"one-wheel-pint",
         name: "One Wheel (Pint)" 
     }];
-    // Create PaymentIntent as soon as the page loads
+
+    // Create PaymentIntent as soon as the page loads to begin tracking the payment workflow
     window 
       .fetch("http://localhost:4242/create-payment-intent", {
         method: "POST",

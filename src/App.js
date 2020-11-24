@@ -1,4 +1,3 @@
-//import logo from './logo.svg';
 import {Component} from 'react';
 import './App.css';
 import Product from './Product';
@@ -13,7 +12,7 @@ class App extends Component {
   constructor() {
     super()
     
-    //Automatically load 1st item in list into shopping card
+    //Put first item sitting in our "shopping cart" on state 
     this.state = {
       product: catalog.products[0].name,
       price: catalog.products[0].price,

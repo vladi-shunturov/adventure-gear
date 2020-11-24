@@ -1,1 +1,1 @@
-PaymentIntentID,PaymentTS,ItemDesc,AmountRecieved,ReceiptEmail,Status
+PaymentIntentID,PaymentTS,ItemDesc,AmountReceived,ReceiptEmail,Status
