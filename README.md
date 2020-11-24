@@ -7,7 +7,7 @@ Developed by Vladi Shunturov using [Create React App](https://github.com/faceboo
 You will need the following:
 
 - [Node.js](http://nodejs.org) >=14.15.1
-- NPM >= 6.14.8 
+- [NPM](https://www.npmjs.com/get-npm) >= 6.14.8 
 - Modern browser that supports ES6 (Chrome preferred)
 - Stripe account to accept payments ([sign up](https://dashboard.stripe.com/register) for free).
 - Stripe CLIL to enable routing for webhooks:  [Stripe CLI Install guide](https://stripe.com/docs/stripe-cli#install)
