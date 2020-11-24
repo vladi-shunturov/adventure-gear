@@ -4,6 +4,7 @@ import {
   useStripe,
   useElements
 } from "@stripe/react-stripe-js";
+
 export default function CheckoutForm() {
   const [succeeded, setSucceeded] = useState(false);
   const [error, setError] = useState(null);
@@ -12,17 +13,13 @@ export default function CheckoutForm() {
   const [clientSecret, setClientSecret] = useState('');
   const stripe = useStripe();
   const elements = useElements();
-
  
   
   useEffect(() => {
     //Cart contents - hardcoded for the purposes of this excercise - single item
-    var cartContents = [{
+    const cartContents = [{
         id:"one-wheel-pint",
-        name: "One Wheel (Pint)",
-        desc: "The One Wheel Pint is more compact and easy to cary when traveling. It packs the same torgue but has a little less than half the range of the XR. Due do it's size, it's less stable and less forgiving on rough terrain.",
-        price: 975,
-        imgName:"onewheel_pint.jpg"
+        name: "One Wheel (Pint)" 
     }];
     // Create PaymentIntent as soon as the page loads
     window 
@@ -89,8 +86,8 @@ export default function CheckoutForm() {
   };
   return (
     <form id="payment-form" onSubmit={handleSubmit}>
-      <input id="name" name="name" class="field" placeholder="Full name" required></input>
-      <input id="email" name="email" class="field" placeholder="E-mail" required></input>
+      <input id="name" name="name" className="field" placeholder="Full name" required></input>
+      <input id="email" name="email" className="field" placeholder="E-mail" required></input>
       <CardElement id="card-element" options={cardStyle} onChange={handleChange} />
       <button
         disabled={processing || disabled || succeeded}

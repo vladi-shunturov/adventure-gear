@@ -30,7 +30,7 @@ class App extends Component {
           <h3>Guest Checkout</h3>
         <Product product={product} price={price} quantity={quantity} imageUrl={imageUrl}/>
         <Elements stripe={promise}>
-          <CheckoutForm />
+          <CheckoutForm cartContents={catalog.products} /> 
         </Elements>
         </header>
       </div>
