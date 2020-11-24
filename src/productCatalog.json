@@ -1,0 +1,18 @@
+{
+    "products": [
+        {
+            "id":"one-wheel-pint",
+            "name": "One Wheel (Pint)",
+            "desc": "The One Wheel Pint is more compact and easy to cary when traveling. It packs the same torgue but has a little less than half the range of the XR. Due do it's size, it's less stable and less forgiving on rough terrain.",
+            "price": 950,
+            "imgUrl":"https://cdn.shopify.com/s/files/1/0696/2011/products/Onewheel_Pint_3-4_Rear_Tan_2a850c9c-1d58-4a5d-9f23-7a755051c012.png?v=1565903118"
+        },
+        {
+            "id":"one-wheel-xr",
+            "name": "One Wheel (XR)",
+            "desc": "The XR is the ultimate personal transport vehicle. With a range of 14 miles and the ability to go up the steepest of streets, the XR will allow to navigate any city, including San Francisco. You can zip up at 20 mph even to the top of Twin Peaks. Due to it's size, it's significantly more stable and forgiving and the vehicle of choice for offfroad OneWheeling.",
+            "price": 1850,
+            "imgUrl":"https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcTVN7PCrFVDC5tg3s1S9TWo9LGpzfZq99IZnMykoS-saTGa3gW5d6bA0GBiewmhK79bBS9x7xw8LyNPJnnHihPppYjLyorcvQ"
+        }
+    ]
+}

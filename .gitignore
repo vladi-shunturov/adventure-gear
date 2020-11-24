@@ -11,7 +11,7 @@
 # production
 /build
 
-#Server-side environment variables which include Stripe secret key 
+#Server-side environmentnpm install --save react-stripe-elements variables which include Stripe secret key 
 .env 
 
 # misc

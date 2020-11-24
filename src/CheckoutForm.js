@@ -16,7 +16,7 @@ export default function CheckoutForm() {
  
   
   useEffect(() => {
-       //Cart contents - hardcoded for the purposes of this excercise - single item
+    //Cart contents - hardcoded for the purposes of this excercise - single item
     var cartContents = [{
         id:"one-wheel-pint",
         name: "One Wheel (Pint)",
@@ -71,10 +71,12 @@ export default function CheckoutForm() {
       payment_method: {
         card: elements.getElement(CardElement),
         billing_details: {
-            name: document.querySelector('#name').value,
-            email: document.querySelector('#email').value
-        }
-      }
+            name: ev.target.name.value,
+            email: ev.target.email.value
+        },
+        
+      },
+      receipt_email: ev.target.email.value
     });
     if (payload.error) {
       setError(`Payment failed ${payload.error.message}`);

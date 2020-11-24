@@ -3,6 +3,7 @@ const express = require("express");
 const app = express();
 const { resolve } = require("path");
 const dotenv = require('dotenv')
+const fs = require('fs');
 require('dotenv').config({ path: '../.env' })
 
 //Initiate Stripe
@@ -35,10 +36,17 @@ app.use(
 
 
 const calculateOrderAmount = items => {
-    var totalAmount = 0.0;
+    //Load server-side product catalog (we will use a static JSON) to ensure we are using server-side prices
+    let catalogRawdata = fs.readFileSync('productCatalog.json');
+    let catalog = JSON.parse(catalogRawdata);
+
+    //Tally up the prices of all items in the cart
+    let totalAmount = 0;
     items.forEach((item) => {
-        totalAmount+=item.price;
-      })
+        catalog.products.forEach((catalogEntry) => {
+            if(item.id===catalogEntry.id) totalAmount+=catalogEntry.price;
+        })
+    })
   return totalAmount*100;
 };
 
@@ -53,7 +61,6 @@ app.post("/create-payment-intent", async (req, res) => {
     description: items[0].name
   });
   res.send({
-   //publishableKey: process.env.STRIPE_PUBLISHABLE_KEY,
     clientSecret: paymentIntent.client_secret
   });
 });
@@ -93,10 +100,9 @@ app.post("/webhook", async (req, res) => {
       // Fulfill any orders, e-mail receipts, etc
       // To cancel the payment after capture you will need to issue a Refund (https://stripe.com/docs/api/refunds)
       console.log("💰 Payment captured!");
-
+    
       //Record transaction in our server-side orders log file
-      let fs = require('fs');
-      let logEntry = "\n" + data.object.id + "," + data.object.created + "," + data.object.description + "," + data.object.amount_received + "," + data.object.receipt_email + "," + data.object.customer + "," + data.object.status;
+      let logEntry = "\n" + data.object.id + "," + data.object.created + "," + data.object.description + "," + data.object.amount_received + "," + data.object.receipt_email + "," + data.object.status;
       fs.appendFile('../logs/ordersLog.csv', logEntry, function (err) {
         if (err) return console.log(err);
         console.log("Order log entry created.");

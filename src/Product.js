@@ -4,9 +4,9 @@ function Product({product, price, quantity, imageUrl}) {
   return (
     <div className="Product">
       <p>{`(${quantity}) ${product}`}</p>
-      <p>{formatter.format(price/100)}</p>
+      <p>{formatter.format(price)}</p>
       <img src={imageUrl} className="App-logo" alt="onewheel" />
-      <p>Total: {formatter.format(quantity*price/100)}</p>
+      <p>Total: {formatter.format(quantity*price)}</p>
     </div>
   );
 }
