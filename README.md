@@ -14,7 +14,7 @@ You will need the following:
 
 **Note**: The app client uses localhost port 3000 and the app server uses port 4242 - please ensure you have no other processes using any of those two ports prior to testing
 
-### Getting Started
+## Getting Started
 
 **1.** Clone the repository and install npm dependencies
 ```
@@ -43,7 +43,7 @@ stripe listen --forward-to localhost:4242/webhook
 * The server will be running on _localhost:4242_ and accept requests from the front-end client, as well as from webhook events relayed through Stripe CLI
 
 
-### Using the App
+## Using the App
 * The app is very simple and begins with the state of a customer who has already added a single item to her shopping cart and clicked on the checkout button. 
 * The app renders the checkout form, allowing the customer to enter their name, email and payment information to complete the purchase. 
 * Because the screen the app loads into is the checkout screen, the app initiates a Payment Intent as soon as the checkout form loads, which happens immediately after the app itself loads.
