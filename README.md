@@ -23,15 +23,17 @@ npm install
 ```
 
 **2.** Use Stripe CLI to enable Webhook routing to localhost:4242
-* Login with your Stripe account ```stripe login```
-* Establish the webbooks routes using the _listen_ Stripe CLI command and forward webbook events to port 4242 at /webhook
+* Login with your Stripe account 
+```stripe login```
+* Establish the webhooks routes using the _listen_ Stripe CLI command and forward webhook events to port 4242 at /webhook
 ```
 stripe listen --forward-to localhost:4242/webhook
 ```
 * Copy the webhook signing secret the Stripe CLI will provide you with and use it in step 3 below
 
 **3.** Configure your .env file and App.js with your keys and secret
-* Rename the provided .env.example template file to .env ```mv .env.example .env```
+* Rename the provided .env.example template file to .env 
+```mv .env.example .env```
 * Set the STRIPE_PUBLISHABLE_KEY to your Stripe test publishable key
 * Set the STRIPE_SECRET_KEY to your Stripe test secret key
 * Set the STRIPE_WEBHOOK_SECRET to the webhook signing secret provided to you by the Stripe CLI in step 2 above
@@ -48,3 +50,6 @@ stripe listen --forward-to localhost:4242/webhook
 * The app renders the checkout form, allowing the customer to enter their name, email and payment information to complete the purchase. 
 * Because the screen the app loads into is the checkout screen itself, the app initiates a Payment Intent as soon as the checkout form loads, which happens immediately after the app loads.
 * Upon the successful completion of a payment the app logs important details about the confirmed purchase in /logs/ordersLog.csv.
+
+##References
+* Stripe samples: [Accepting a card payment](https://github.com/stripe-samples/accept-a-card-payment)
