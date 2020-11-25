@@ -1,16 +1,15 @@
-# Adventure Gear - Payment Intent Workflow
+# Adventure Gear - Payment Intents Workflow
 
-Developed by Vladi Shunturov using [Create React App](https://github.com/facebook/create-react-app), NodeJS, Stripe PaymentIntent API & Stripe Elements.
+Developed by Vladi Shunturov using [Create React App](https://github.com/facebook/create-react-app), NodeJS, Stripe Payment Intents API & Stripe Elements.
 
 ## Requirements
 
 You will need the following:
 
 - [Node.js](http://nodejs.org) >=14.15.1
-- [NPM](https://www.npmjs.com/get-npm) >= 6.14.8 
 - Modern browser that supports ES6 (Chrome preferred)
 - Stripe account to accept payments ([sign up](https://dashboard.stripe.com/register) for free)
-- Stripe CLIL to enable routing for webhooks:  [Stripe CLI Install guide](https://stripe.com/docs/stripe-cli#install)
+- Stripe CLI to enable routing for webhooks:  [Stripe CLI Install guide](https://stripe.com/docs/stripe-cli#install)
 
 **Note**: The app client uses localhost port 3000 and the app server uses port 4242 - please ensure you have no other processes using any of those two ports prior to testing
 
@@ -18,7 +17,7 @@ You will need the following:
 
 **1.** Clone the repository and install npm dependencies
 ```
-git clone `this repo` adventure-gear
+git clone https://github.com/vladi-shunturov/adventure-gear.git
 cd adventure-gear
 npm install
 ```
@@ -31,11 +30,12 @@ stripe listen --forward-to localhost:4242/webhook
 ```
 * Copy the webhook signing secret the Stripe CLI will provide you with and use it in step 3 below
 
-**3.** Configure your .env file
+**3.** Configure your .env file and App.js with your keys and secret
 * Rename the provided .env.example template file to .env ```mv .env.example .env```
 * Set the STRIPE_PUBLISHABLE_KEY to your Stripe test publishable key
 * Set the STRIPE_SECRET_KEY to your Stripe test secret key
 * Set the STRIPE_WEBHOOK_SECRET to the webhook signing secret provided to you by the Stripe CLI in step 2 above
+* Edit src/App.js and update line 8 with your Stripe API Publishable Key
 
 **4.** Start the application 
 * Run `npm start` to launch the app in development mode
