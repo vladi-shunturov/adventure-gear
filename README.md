@@ -1,70 +1,50 @@
-# Getting Started with Create React App
+# Adventure Gear - Payment Intent Workflow
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Developed by Vladi Shunturov using [Create React App](https://github.com/facebook/create-react-app), NodeJS, Stripe PaymentIntent API & Stripe Elements.
 
-## Available Scripts
+## Requirements
 
-In the project directory, you can run:
+You will need the following:
 
-### `npm start`
+- [Node.js](http://nodejs.org) >=14.15.1
+- [NPM](https://www.npmjs.com/get-npm) >= 6.14.8 
+- Modern browser that supports ES6 (Chrome preferred)
+- Stripe account to accept payments ([sign up](https://dashboard.stripe.com/register) for free)
+- Stripe CLIL to enable routing for webhooks:  [Stripe CLI Install guide](https://stripe.com/docs/stripe-cli#install)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+**Note**: The app client uses localhost port 3000 and the app server uses port 4242 - please ensure you have no other processes using any of those two ports prior to testing
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Installation
 
-### `npm test`
+**1.** Clone the repository and install npm dependencies
+```
+git clone `this repo` adventure-gear
+cd adventure-gear
+npm install
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+**2.** Use Stripe CLI to enable Webhook routing to localhost:4242
+* Login with your Stripe account ```stripe login```
+* Establish the webbooks routes using the _listen_ Stripe CLI command and forward webbook events to port 4242 at /webhook
+```
+stripe listen --forward-to localhost:4242/webhook
+```
+* Copy the webhook signing secret the Stripe CLI will provide you with and use it in step 3 below
 
-### `npm run build`
+**3.** Configure your .env file
+* Rename the provided .env.example template file to .env ```mv .env.example .env```
+* Set the STRIPE_PUBLISHABLE_KEY to your Stripe test publishable key
+* Set the STRIPE_SECRET_KEY to your Stripe test secret key
+* Set the STRIPE_WEBHOOK_SECRET to the webhook signing secret provided to you by the Stripe CLI in step 2 above
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+**4.** Start the application 
+* Run `npm start` to launch the app in development mode
+* Open a browser (Chrome) and navigate to _localhost:3000_
+* The server will be running on _localhost:4242_ and accept requests from the front-end client, as well as from webhook events relayed through Stripe CLI
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Usage
+* The app is very simple and begins with the state of a customer who has already added a single item to her shopping cart and clicked on the checkout button. 
+* The app renders the checkout form, allowing the customer to enter their name, email and payment information to complete the purchase. 
+* Because the screen the app loads into is the checkout screen itself, the app initiates a Payment Intent as soon as the checkout form loads, which happens immediately after the app loads.
+* Upon the successful completion of a payment the app logs important details about the confirmed purchase in /logs/ordersLog.csv.
