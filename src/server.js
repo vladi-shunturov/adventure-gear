@@ -52,17 +52,24 @@ const calculateOrderAmount = items => {
 
 //Payment intent endpoint, initiated when checkout form first loads (main app)
 app.post("/create-payment-intent", async (req, res) => {
-  const { items } = req.body;
+  try {
+    const { items } = req.body;
 
-  // Create a PaymentIntent with the order amount and currency
-  const paymentIntent = await stripe.paymentIntents.create({
-    amount: calculateOrderAmount(items),
-    currency: "usd",
-    description: items[0].name
-  });
-  res.send({
-    clientSecret: paymentIntent.client_secret
-  });
+    // Create a PaymentIntent with the order amount and currency
+    const paymentIntent = await stripe.paymentIntents.create({
+      amount: calculateOrderAmount(items),
+      currency: "usd",
+      description: items[0].name
+    });
+    res.send({
+      clientSecret: paymentIntent.client_secret
+    });
+  } catch (err) {
+      if(err.type==='StripeAuthenticationError') {
+        console.log("ERROR: Your Stripe API key(s) are incorrect.");
+        console.log("Please follow the README instructions to ensure you have correctly configured your .env file with your own Stripe keys."); 
+      else console.log(err)
+    }
 });
 
 // Expose an endpoint as a webhook handler for asynchronous events.
