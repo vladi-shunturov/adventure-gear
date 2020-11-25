@@ -51,5 +51,5 @@ stripe listen --forward-to localhost:4242/webhook
 * Because the screen the app loads into is the checkout screen itself, the app initiates a Payment Intent as soon as the checkout form loads, which happens immediately after the app loads.
 * Upon the successful completion of a payment the app logs important details about the confirmed purchase in /logs/ordersLog.csv.
 
-##References
+## References
 * Stripe samples: [Accepting a card payment](https://github.com/stripe-samples/accept-a-card-payment)
