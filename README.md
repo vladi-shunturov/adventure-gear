@@ -35,7 +35,7 @@ stripe listen --forward-to localhost:4242/webhook
 * Set the STRIPE_PUBLISHABLE_KEY to your Stripe test publishable key
 * Set the STRIPE_SECRET_KEY to your Stripe test secret key
 * Set the STRIPE_WEBHOOK_SECRET to the webhook signing secret provided to you by the Stripe CLI in step 2 above
-* Edit src/App.js and update line 8 with your Stripe API Publishable Key
+* Configure the client with your Stripe API Publishable key - edit src/App.js and update line 8 with your pub key
 
 **4.** Start the application 
 * Run `npm start` to launch the app in development mode
