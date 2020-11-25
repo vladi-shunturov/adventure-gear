@@ -5,7 +5,7 @@ import CheckoutForm from './CheckoutForm';
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import catalog from './productCatalog.json'; //Load product catalog
-const promise = loadStripe("pk_test_51HnbQwD8eNCjterIwREj2Td5WjmJ7EYSfLJVskDHSW8D8GPvqVw7vKSwD3zO09lNB8blM5WJxidAWurMsTpHtaap00fD9TXHNo");
+const promise = loadStripe("pk_test_12345");
 
 
 class App extends Component {
