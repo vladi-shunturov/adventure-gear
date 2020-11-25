@@ -33,7 +33,6 @@ app.use(
   })
 );
 
-
 //Server side calculation of amount to prevent bad actors
 const calculateOrderAmount = items => {
     //Load server-side product catalog (we will use a static JSON) to ensure we are using server-side prices
@@ -68,6 +67,7 @@ app.post("/create-payment-intent", async (req, res) => {
       if(err.type==='StripeAuthenticationError') {
         console.log("ERROR: Your Stripe API key(s) are incorrect.");
         console.log("Please follow the README instructions to ensure you have correctly configured your .env file with your own Stripe keys."); 
+      }
       else console.log(err)
     }
 });
