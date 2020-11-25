@@ -5,7 +5,8 @@ import CheckoutForm from './CheckoutForm';
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import catalog from './productCatalog.json'; //Load product catalog
-const promise = loadStripe("pk_test_12345");
+const promise = loadStripe("pk_test_12345"); //Update with your Sripe API Publishable key
+
 
 
 class App extends Component {
